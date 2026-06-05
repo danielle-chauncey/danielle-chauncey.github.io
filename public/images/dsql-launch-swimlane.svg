@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="Inter, -apple-system, sans-serif">
+  <!-- Background -->
+  <rect width="900" height="480" fill="#fafafa"/>
+
+  <!-- Title -->
+  <text x="450" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#1a1a1a">T1 Launch Swimlane: Multi-Region Serverless Database (8 weeks)</text>
+
+  <!-- Timeline header -->
+  <rect x="160" y="45" width="720" height="30" rx="4" fill="#f3f4f6"/>
+  <text x="252" y="65" text-anchor="middle" font-size="10" font-weight="600" fill="#6b7280">W1-2</text>
+  <text x="432" y="65" text-anchor="middle" font-size="10" font-weight="600" fill="#6b7280">W3-4</text>
+  <text x="612" y="65" text-anchor="middle" font-size="10" font-weight="600" fill="#6b7280">W5-6</text>
+  <text x="792" y="65" text-anchor="middle" font-size="10" font-weight="600" fill="#6b7280">W7-8</text>
+  <!-- Divider lines -->
+  <line x1="342" y1="45" x2="342" y2="460" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="522" y1="45" x2="522" y2="460" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="702" y1="45" x2="702" y2="460" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- Swimlane 1: Positioning & Messaging -->
+  <rect x="10" y="85" width="140" height="55" rx="4" fill="#1a1a1a"/>
+  <text x="80" y="107" text-anchor="middle" font-size="10" font-weight="600" fill="#ffffff">POSITIONING</text>
+  <text x="80" y="122" text-anchor="middle" font-size="10" font-weight="600" fill="#ffffff">&amp; MESSAGING</text>
+  <!-- Work blocks -->
+  <rect x="165" y="90" width="170" height="44" rx="4" fill="#2563eb" opacity="0.9"/>
+  <text x="250" y="110" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Persona research</text>
+  <text x="250" y="124" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Competitive mapping</text>
+  <rect x="345" y="90" width="170" height="44" rx="4" fill="#2563eb" opacity="0.75"/>
+  <text x="430" y="110" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Messaging doc</text>
+  <text x="430" y="124" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Value prop by persona</text>
+  <rect x="525" y="90" width="80" height="44" rx="4" fill="#2563eb" opacity="0.5"/>
+  <text x="565" y="112" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Refine</text>
+
+  <!-- Swimlane 2: Product Documentation -->
+  <rect x="10" y="160" width="140" height="55" rx="4" fill="#1a1a1a"/>
+  <text x="80" y="182" text-anchor="middle" font-size="10" font-weight="600" fill="#ffffff">PRODUCT</text>
+  <text x="80" y="197" text-anchor="middle" font-size="10" font-weight="600" fill="#ffffff">DOCUMENTATION</text>
+  <!-- Work blocks -->
+  <rect x="165" y="165" width="80" height="44" rx="4" fill="#7c3aed" opacity="0.6"/>
+  <text x="205" y="190" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Outline</text>
+  <rect x="255" y="165" width="260" height="44" rx="4" fill="#7c3aed" opacity="0.85"/>
+  <text x="385" y="185" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Developer guide, API reference,</text>
+  <text x="385" y="199" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">getting started, code samples</text>
+  <rect x="525" y="165" width="170" height="44" rx="4" fill="#7c3aed" opacity="0.65"/>
+  <text x="610" y="185" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Review cycles</text>
+  <text x="610" y="199" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Technical accuracy</text>
+  <rect x="705" y="165" width="80" height="44" rx="4" fill="#7c3aed" opacity="0.5"/>
+  <text x="745" y="190" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Ship</text>
+
+  <!-- Swimlane 3: Console UX -->
+  <rect x="10" y="235" width="140" height="55" rx="4" fill="#1a1a1a"/>
+  <text x="80" y="257" text-anchor="middle" font-size="10" font-weight="600" fill="#ffffff">CONSOLE UX</text>
+  <text x="80" y="272" text-anchor="middle" font-size="10" font-weight="600" fill="#ffffff">DESIGN</text>
+  <!-- Work blocks -->
+  <rect x="255" y="240" width="170" height="44" rx="4" fill="#059669" opacity="0.8"/>
+  <text x="340" y="260" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Provisioning flow</text>
+  <text x="340" y="274" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">In-console education</text>
+  <rect x="435" y="240" width="170" height="44" rx="4" fill="#059669" opacity="0.6"/>
+  <text x="520" y="260" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">UX review</text>
+  <text x="520" y="274" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Iteration</text>
+  <rect x="615" y="240" width="80" height="44" rx="4" fill="#059669" opacity="0.45"/>
+  <text x="655" y="265" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Final</text>
+
+  <!-- Swimlane 4: GTM & Landing Page -->
+  <rect x="10" y="310" width="140" height="55" rx="4" fill="#1a1a1a"/>
+  <text x="80" y="332" text-anchor="middle" font-size="10" font-weight="600" fill="#ffffff">GTM &amp; LANDING</text>
+  <text x="80" y="347" text-anchor="middle" font-size="10" font-weight="600" fill="#ffffff">PAGE</text>
+  <!-- Work blocks -->
+  <rect x="435" y="315" width="170" height="44" rx="4" fill="#dc2626" opacity="0.75"/>
+  <text x="520" y="335" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Landing page copy</text>
+  <text x="520" y="349" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Blog draft</text>
+  <rect x="615" y="315" width="170" height="44" rx="4" fill="#dc2626" opacity="0.6"/>
+  <text x="700" y="335" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Announcement post</text>
+  <text x="700" y="349" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Social seeding</text>
+
+  <!-- Swimlane 5: Field Enablement -->
+  <rect x="10" y="385" width="140" height="55" rx="4" fill="#1a1a1a"/>
+  <text x="80" y="407" text-anchor="middle" font-size="10" font-weight="600" fill="#ffffff">FIELD</text>
+  <text x="80" y="422" text-anchor="middle" font-size="10" font-weight="600" fill="#ffffff">ENABLEMENT</text>
+  <!-- Work blocks -->
+  <rect x="525" y="390" width="170" height="44" rx="4" fill="#d97706" opacity="0.75"/>
+  <text x="610" y="410" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Battlecard, talk tracks</text>
+  <text x="610" y="424" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Objection handling</text>
+  <rect x="705" y="390" width="80" height="44" rx="4" fill="#d97706" opacity="0.55"/>
+  <text x="745" y="410" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">Sales</text>
+  <text x="745" y="424" text-anchor="middle" font-size="10" font-weight="500" fill="#ffffff">training</text>
+
+  <!-- GA Milestone -->
+  <line x1="800" y1="80" x2="800" y2="450" stroke="#dc2626" stroke-width="2" stroke-dasharray="6,3"/>
+  <rect x="770" y="450" width="60" height="22" rx="3" fill="#dc2626"/>
+  <text x="800" y="465" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff">GA DAY</text>
+</svg>

@@ -1,0 +1,51 @@
+baseURL = 'https://danielle-chauncey.github.io/'
+locale = 'en-us'
+title = 'Danielle Chauncey'
+theme = 'PaperMod'
+paginate = 10
+
+[params]
+  author = 'Danielle Chauncey'
+  description = 'Content strategy, product marketing, and AI-native workflows.'
+  ShowReadingTime = false
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  defaultTheme = 'light'
+  disableThemeToggle = false
+
+  [params.homeInfoParams]
+    Title = 'Danielle Chauncey'
+    Content = 'I design how technical products get positioned, launched, and scaled. I build AI systems that make it repeatable.'
+
+  [[params.socialIcons]]
+    name = 'linkedin'
+    url = 'https://linkedin.com/in/danielle-chauncey'
+
+  [[params.socialIcons]]
+    name = 'github'
+    url = 'https://github.com/danielle-chauncey'
+
+  [[params.socialIcons]]
+    name = 'email'
+    url = 'mailto:danielle_chauncey@icloud.com'
+
+[menu]
+  [[menu.main]]
+    name = 'Work'
+    url = '/work/'
+    weight = 10
+
+  [[menu.main]]
+    name = 'Projects'
+    url = '/projects/'
+    weight = 20
+
+  [[menu.main]]
+    name = 'About'
+    url = '/about/'
+    weight = 30
+
+[outputs]
+  home = ['HTML', 'RSS', 'JSON']
