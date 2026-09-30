@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample Launch Brief: Chainguard Agent Skills | Danielle Chauncey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700;800&family=Source+Code+Pro:wght@500;700&display=swap" rel="stylesheet"><!-- swap for the closest free match to the brand font -->
+<style>
+  
+  :root {
+    --ink: #14003d; --ink-2: #3443f4; --ink-soft: #9d7af6; --on-ink: #e9e2fe;
+    --accent: #6226fb; --accent-light: #7af0fe; --accent-2: #44fd2b;
+    --surface: #f8f6fe; --muted: #3d4449; --line: #e5e3ea;
+    --font: "Gellix", "Figtree", "Helvetica Neue", Arial, sans-serif;
+    --mono: "Roobert Semi Mono", "Source Code Pro", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); color: var(--ink); background: #c9cbd6; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { width: 8.5in; height: 11in; margin: 0.4in auto; background: #fff; position: relative; overflow: hidden; padding: 0.7in 0.75in; }
+  @media print { body { background: none; } .page { margin: 0; page-break-after: always; } }
+  @page { size: letter; margin: 0; }
+
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  h1 { font-weight: 300; font-size: 50px; line-height: 1.02; letter-spacing: -.01em; }
+  h2 { font-weight: 300; font-size: 34px; line-height: 1.08; margin: 10px 0 18px; }
+  h3 { font-weight: 600; font-size: 17px; margin-bottom: 6px; }
+  p, li { font-size: 13.5px; line-height: 1.55; color: var(--muted); }
+  strong { color: var(--ink); font-weight: 600; }
+  .foot { position: absolute; left: .75in; right: .75in; bottom: .4in; display: flex; justify-content: space-between; font-size: 9.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
+
+  /* Page 1: dark hero */
+  .hero { background: var(--ink); color: #fff; }
+  .hero .glow { position: absolute; width: 640px; height: 640px; right: -260px; top: -200px; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 75%, transparent) 0%, transparent 65%); }
+  .hero .glow2 { position: absolute; width: 520px; height: 520px; left: -240px; bottom: -220px; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--accent-2) 35%, transparent) 0%, transparent 65%); }
+  .hero .wordmark { font-weight: 700; font-size: 20px; letter-spacing: .02em; position: relative; }
+  .hero .wordmark span { color: var(--accent-light); font-weight: 400; }
+  .hero .eyebrow { color: var(--accent-light); margin-top: 1.55in; position: relative; }
+  .hero h1 { color: #fff; margin: 14px 0 22px; max-width: 6.2in; position: relative; }
+  .hero .lede { font-size: 17px; line-height: 1.5; color: var(--on-ink); max-width: 5.6in; position: relative; }
+  .stats { position: absolute; left: .75in; right: .75in; bottom: 1.05in; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .stat { border-top: 2px solid var(--accent-2); padding-top: 12px; }
+  .stat b { display: block; font-size: 40px; font-weight: 300; color: #fff; }
+  .stat small { font-size: 12px; line-height: 1.4; color: var(--on-ink); display: block; }
+  .hero .foot { color: var(--ink-soft); border-top-color: rgba(255,255,255,.12); }
+
+  /* Page 2 */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 8px; }
+  .card { background: var(--surface); border-radius: 14px; padding: 20px 20px 18px; }
+  .card.dark { background: var(--ink); }
+  .card.dark h3, .card.dark li { color: #fff; }
+  .card ul { padding-left: 18px; margin-top: 8px; }
+  .card li { margin-bottom: 7px; }
+  .quote { margin-top: 26px; border-left: 3px solid var(--accent); padding: 4px 0 4px 18px; }
+  .quote p { font-size: 18px; font-weight: 300; line-height: 1.45; color: var(--ink); }
+  .quote cite { display: block; margin-top: 8px; font-style: normal; font-size: 11.5px; color: var(--muted); }
+  .triggers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 26px; }
+  .trigger { border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+  .trigger .n { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: .1em; }
+
+  /* Page 3: recovery flow */
+  .flow { display: grid; grid-template-rows: repeat(4, auto); gap: 12px; margin-top: 6px; }
+  .step { display: grid; grid-template-columns: 58px 1.15fr 1fr 1fr; gap: 14px; align-items: stretch; }
+  .step .num { background: var(--ink); color: #fff; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 300; }
+  .step:nth-child(2) .num { background: var(--ink-2); } .step:nth-child(3) .num { background: var(--accent); } .step:nth-child(4) .num { background: var(--accent-2); }
+  .step .cell { background: var(--surface); border-radius: 12px; padding: 12px 14px; }
+  .step .cell .lbl { font-size: 9.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .step .cell p { font-size: 12.5px; line-height: 1.45; }
+  .step .cell h3 { font-size: 16px; margin-bottom: 3px; }
+  .step .cell .prod { font-size: 11px; font-weight: 600; color: var(--ink-soft); }
+  .colhead { display: grid; grid-template-columns: 58px 1.15fr 1fr 1fr; gap: 14px; margin: 18px 0 6px; }
+  .colhead div { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .note { margin-top: 18px; font-size: 12.5px; }
+
+  /* Page 4 */
+  .proof { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 4px; }
+  .proof .card b { display: block; font-size: 32px; font-weight: 300; color: var(--accent); line-height: 1.1; margin-bottom: 4px; }
+  .proof .card p { font-size: 12.5px; }
+  .cta { margin-top: 24px; background: var(--ink); border-radius: 16px; padding: 22px 26px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; }
+  .cta h3 { color: #fff; font-size: 20px; font-weight: 400; }
+  .cta p, .cta li { color: var(--on-ink); font-size: 12.5px; }
+  .cta ol { padding-left: 18px; }
+  .cta .pill { display: inline-block; margin-top: 12px; background: var(--accent-2); color: #fff; font-weight: 700; font-size: 12px; padding: 8px 16px; border-radius: 999px; }
+  .sources { margin-top: 20px; }
+  .sources p { font-size: 9.5px; line-height: 1.5; }
+
+  /* Chainguard register: heavy tight headlines, square corners, mono labels, pixel grid */
+  h1 { font-weight: 800; letter-spacing: -.03em; font-size: 52px; }
+  h2 { font-weight: 800; letter-spacing: -.025em; font-size: 32px; }
+  h3 { font-weight: 700; }
+  p, li { color: var(--muted); }
+  .eyebrow, .trigger .n, .step .cell .lbl, .colhead div, .foot { font-family: var(--mono); letter-spacing: .06em; }
+  .card, .trigger, .step .num, .step .cell, .cta, .cta .pill { border-radius: 0 !important; }
+  .card.dark h3 { color: var(--accent-light); }
+  .hero { background: var(--ink); }
+  .hero .glow, .hero .glow2 { display: none; }
+  .pixels { position: absolute; right: 0; top: 0; width: 3.4in; height: 3.4in; display: grid; grid-template-columns: repeat(8, 1fr); }
+  .pixels i { display: block; }
+  .pixels i.on { background: var(--accent); } .pixels i.hi { background: var(--ink-2); } .pixels i.cy { background: var(--accent-light); }
+  .stat { border-top-color: var(--accent-light); }
+  .stat b { font-weight: 800; letter-spacing: -.02em; }
+  .code { font-family: var(--mono); font-size: 11.5px; background: var(--ink); color: var(--accent-light); padding: 10px 12px; margin-top: 10px; }
+  table.msg { width: 100%; border-collapse: collapse; margin-top: 14px; }
+  table.msg th { font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); text-align: left; padding: 8px 10px; border-bottom: 2px solid var(--accent); }
+  table.msg td { font-size: 12px; line-height: 1.45; color: var(--muted); padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.msg td:first-child { font-weight: 700; color: var(--ink); width: 1.25in; }
+  .pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+  .pillar { background: var(--surface); border-left: 4px solid var(--accent); padding: 12px 14px; }
+  .pillar h3 { font-size: 15px; margin-bottom: 4px; }
+  .pillar p { font-size: 12px; line-height: 1.45; }
+  .pillar .src { font-family: var(--mono); font-size: 9.5px; color: var(--accent); margin-top: 6px; display: block; }
+  .pos { background: var(--ink); color: #fff; padding: 16px 20px; margin-top: 8px; font-size: 15px; line-height: 1.5; font-weight: 500; }
+  .pos b { color: var(--accent-light); font-weight: 700; }
+  .timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 10px; }
+  .tl { border-top: 4px solid var(--accent); background: var(--surface); padding: 12px 14px; }
+  .tl:nth-child(2) { border-top-color: var(--ink-2); } .tl:nth-child(3) { border-top-color: var(--accent-2); }
+  .tl .when { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--ink); }
+  .tl ul { padding-left: 16px; margin-top: 6px; } .tl li { font-size: 11.5px; line-height: 1.45; margin-bottom: 4px; }
+  .metrics { display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; margin-top: 10px; }
+  .ns { background: var(--accent); color: #fff; padding: 14px 16px; }
+  .ns .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: .08em; color: var(--on-ink); }
+  .ns b { display: block; font-size: 18px; font-weight: 800; margin-top: 4px; line-height: 1.25; }
+  .ns p { color: var(--on-ink); font-size: 11.5px; margin-top: 6px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<section class="page hero">
+  <div class="pixels"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class="hi"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class="hi"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class="hi"></i><i class=""></i><i class="cy"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="cy"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="hi"></i><i class="on"></i><i class="hi"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class="hi"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class="cy"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+  <div class="wordmark">Chainguard <span>Agent Skills</span></div>
+  <div class="eyebrow" style="margin-top:1.9in">Launch brief · First-party skill hardening + MCP server</div>
+  <h1>Your team's own skills are dependencies too.</h1>
+  <p class="lede">Agent Skills already hardens 1,000+ community skills. This launch brings the same pipeline to the skills your team writes, and adds an MCP server so every agent pulls the current hardened version on its own.</p>
+  <div class="stats">
+    <div class="stat"><b>350,000+</b><small>skills on public registries within two months</small></div>
+    <div class="stat"><b>36%</b><small>of scanned public skills had at least one security flaw (Snyk ToxicSkills)</small></div>
+    <div class="stat"><b>72%</b><small>of enterprises are using or testing AI agents</small></div>
+  </div>
+  <div class="foot"><span>Independent sample by Danielle Chauncey. Not affiliated with or endorsed by Chainguard. Figures as published by Chainguard, June 2026.</span><span>1 / 4</span></div>
+</section>
+
+<!-- PAGE 2 -->
+<section class="page">
+  <div class="eyebrow">01 · The launch</div>
+  <h2>Take first-party hardening and MCP from closed beta to GA.</h2>
+  <div class="split" style="grid-template-columns:1.25fr 1fr">
+    <div class="card"><h3>What ships</h3><ul>
+      <li><strong>Hardening-as-a-service for first-party skills.</strong> Teams submit the skills they write. Chainguard reviews, fixes, and returns each one with a HARDENING.md audit log.</li>
+      <li><strong>Custom rulesets.</strong> Add org-specific rules on top of Chainguard's baseline.</li>
+      <li><strong>Agent Skills MCP server.</strong> Agents query and pull the right skill on demand. When a skill is re-hardened, every agent gets the update.</li>
+    </ul>
+    <div class="code">skills.cgr.dev/&lt;org&gt;/&lt;skill_name&gt;:&lt;version tag&gt;</div></div>
+    <div class="card dark"><h3>Launch tier: 2</h3><ul>
+      <li>Expands a live product to a new artifact class</li>
+      <li>Opens the paid enterprise tier of Agent Skills</li>
+      <li>Rides the Gartner MQ Leader news for analyst and field air cover</li>
+    </ul></div>
+  </div>
+
+  <div class="eyebrow" style="margin-top:24px">02 · Who it's for</div>
+  <table class="msg">
+    <tr><th>Audience</th><th>Role in the deal</th><th>What they need to hear</th></tr>
+    <tr><td>Platform engineering</td><td>Owns the internal skill library and developer tooling</td><td>One registry and one install path for every skill the org uses, community and first-party.</td></tr>
+    <tr><td>AppSec / security leads</td><td>Approves the budget and signs off on risk</td><td>An audit trail for every change to every skill, and rules that match your risk posture.</td></tr>
+    <tr><td>Developers</td><td>Daily users in Claude Code, Cursor, Copilot, Gemini CLI</td><td>Nothing changes in your workflow. The agent pulls the safe version.</td></tr>
+  </table>
+
+  <div class="eyebrow" style="margin-top:24px">03 · The real alternative</div>
+  <div class="triggers">
+    <div class="trigger"><div class="n">TODAY</div><h3>Skills live everywhere</h3><p>Slack threads, shared drives, and personal instances. No versioning, access control, or audit trail.</p></div>
+    <div class="trigger"><div class="n">TODAY</div><h3>Scanners flag and stop</h3><p>A report lands with a developer who has no time to rewrite the skill.</p></div>
+    <div class="trigger"><div class="n">TODAY</div><h3>"Internal means safe"</h3><p>First-party skills still pull scripts, downloads, and broad permissions.</p></div>
+  </div>
+  <div class="foot"><span>Chainguard Agent Skills · Launch brief (sample)</span><span>2 / 4</span></div>
+</section>
+
+<!-- PAGE 3 -->
+<section class="page">
+  <div class="eyebrow">04 · Positioning</div>
+  <div class="pos">For platform and security teams whose developers write their own agent skills, <b>Chainguard Agent Skills</b> is the registry and hardening pipeline that <b>fixes risky skills before an agent runs them</b>, and keeps every agent on the current safe version.</div>
+
+  <div class="eyebrow" style="margin-top:22px">05 · Message pillars, each with public proof</div>
+  <div class="pillars">
+    <div class="pillar"><h3>It fixes the skill</h3><p>Every hardened skill ships with a HARDENING.md: each rule checked, what was found, what changed, and proof nothing material broke.</p><span class="src">Chainguard blog, June 17, 2026</span></div>
+    <div class="pillar"><h3>It stays current</h3><p>Skills re-harden when the source changes or a rule is added. Through MCP, agents get the new version with no local copy to update.</p><span class="src">Chainguard blog, June 17, 2026</span></div>
+    <div class="pillar"><h3>Version discipline for agent behavior</h3><p>Pin an agent to a skill SHA. Roll back when something breaks. Registry entitlements stay inside your org.</p><span class="src">Chainguard blog, June 17, 2026</span></div>
+    <div class="pillar"><h3>Your rules, on top of ours</h3><p>Custom rulesets extend the baseline, which already targets over-permissioning, obfuscated commands, and credential harvesting.</p><span class="src">Chainguard blog, June 17, 2026</span></div>
+  </div>
+
+  <div class="eyebrow" style="margin-top:22px">06 · Field enablement: objections</div>
+  <table class="msg">
+    <tr><th>They say</th><th>We say</th></tr>
+    <tr><td>"We already scan our skills."</td><td>Keep scanning. Chainguard changes what happens next: the skill comes back fixed, with a diff your auditors can read.</td></tr>
+    <tr><td>"Our skills are internal."</td><td>So are the permissions they grant. A first-party skill carries the same supply chain risk as a community one.</td></tr>
+    <tr><td>"Another tool to roll out?"</td><td>Push and pull with chainctl. Developers install a hardened skill the way they install any SKILL.md today.</td></tr>
+  </table>
+  <div class="foot"><span>Chainguard Agent Skills · Launch brief (sample)</span><span>3 / 4</span></div>
+</section>
+
+<!-- PAGE 4 -->
+<section class="page">
+  <div class="eyebrow">07 · Launch plan</div>
+  <h2>Proof first, then noise.</h2>
+  <div class="timeline">
+    <div class="tl"><div class="when">T-30 DAYS</div><ul>
+      <li>Two closed-beta customers on the record, one platform and one security voice</li>
+      <li>Seller one-pager and objection guide</li>
+      <li>Analyst briefings, framed on the new Gartner MQ category</li></ul></div>
+    <div class="tl"><div class="when">LAUNCH DAY</div><ul>
+      <li>Blog, docs on Chainguard Academy, pricing page update</li>
+      <li>Demo video: harden a first-party skill end to end and read its HARDENING.md</li>
+      <li>Email to Containers and Libraries customers</li></ul></div>
+    <div class="tl"><div class="when">T+30 DAYS</div><ul>
+      <li>Customer story with a before-and-after skill inventory</li>
+      <li>Webinar with a beta customer</li>
+      <li>Read the numbers and reset targets</li></ul></div>
+  </div>
+
+  <div class="eyebrow" style="margin-top:22px">08 · How I'd measure it</div>
+  <div class="metrics">
+    <div class="ns"><div class="lbl">NORTH STAR</div><b>Orgs with first-party skills in their private registry</b><p>It shows the product became where a team's own skills live.</p></div>
+    <div class="card"><h3>Inputs</h3><ul>
+      <li>Time from signup to first hardened first-party skill</li>
+      <li>Agents connected through the MCP server</li>
+      <li>Beta-to-paid conversion</li>
+      <li>Expansion pipeline from existing Containers and Libraries accounts</li></ul>
+      <p style="font-size:11px;margin-top:6px">Every target is a hypothesis until the first month sets a baseline.</p></div>
+  </div>
+
+  <div class="sources">
+    <div class="eyebrow" style="margin-bottom:6px">Sources</div>
+    <p>Chainguard, "Introducing Chainguard Agent Skills: Because your AI agent shouldn't trust strangers" (Mar 17, 2026). Chainguard, "Chainguard Agent Skills is now open to everyone, with a private registry to manage your internal skills" (Jun 17, 2026): 1,000+ hardened skills, 350,000+ public skills, 36% (Snyk ToxicSkills), 72% of enterprises, HARDENING.md, private registry, closed beta and MCP details. Chainguard, "Everything we announced during AI Readiness Innovation Week" (Jun 25, 2026): Gartner Magic Quadrant for Software Supply Chain Security. Chainguard Academy, Agent Skills documentation.</p>
+    <p style="margin-top:8px"><strong>About this sample.</strong> This is a launch brief for a hypothetical GA of features Chainguard announced in closed beta. I wrote it to show how I'd run a launch: one audience per role in the deal, the real alternative, a positioning line, pillars with public proof, and a plan that lands customer proof before launch day. I write a SKILL.md file for every repeatable workflow in my own work and run most of my job through agents and MCP. The layout follows Chainguard's public design tokens. I used public information only. I work at AWS, and this uses no AWS internal information.</p>
+  </div>
+  <div class="foot"><span>Independent sample by Danielle Chauncey · danielle-chauncey.github.io</span><span>4 / 4</span></div>
+</section>
+
+</body>
+</html>
