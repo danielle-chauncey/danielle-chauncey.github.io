@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Use Case-Led Style Guide for a Solutions Library | Danielle Chauncey</title>
+<meta name="description" content="The style guide behind a cloud solutions library, anonymized: taxonomy, naming formats, description formulas, page anatomy, diagram and step rules, architecture pillar writing, and writing standards.">
+<meta name="date" content="2026-10-09">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  /* Field Notes system, letter format (matches the playbook and briefing samples) */
+  :root { --ink:#17171d; --muted:#5c5c6b; --hair:#e3e1da; --hair-2:#eeece6; --paper:#f5f3ec;
+          --indigo:#4a3fd6; --indigo-wash:#e4e1fb; --lime:#c8f03c; --lime-deep:#4f6b00; --lime-wash:#f3fbdc;
+          --amber:#d98a12; --amber-wash:#fff6e6; --coral:#8f2615; --coral-wash:#fbe1dc; }
+  @page { size: letter; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #9a9a9a; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font: 400 9.6pt/1.4 'Inter', Arial, sans-serif; color: var(--ink); }
+  .page { width: 8.5in; height: 11in; background: #fff; margin: 0 auto 24px; padding: 0.42in 0.6in 0.6in; position: relative; overflow: hidden; page-break-after: always; break-after: page; }
+  @media print { html, body { background: none; } .page { margin: 0; } }
+  a { color: var(--indigo); text-decoration: none; }
+
+  .banner { font: 600 7.5pt 'JetBrains Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: #8a4b00; background: #fdf1dc; border: 1px solid #f0d9ae; padding: 5px 10px; border-radius: 3px; display: inline-block; }
+  h1 { font: 800 25pt/1.06 'Inter'; letter-spacing: -.025em; margin: 14px 0 6px; }
+  .meta { color: var(--muted); font-size: 10pt; max-width: 6.4in; }
+  .sub { color: var(--muted); font-size: 9pt; }
+  p + p { margin-top: 5px; }
+  ul { padding-left: 14px; } li { margin-bottom: 2px; }
+
+  .runhead { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid var(--ink); padding-bottom: 5px; margin-bottom: 9px; }
+  .runhead h2 { display: flex; align-items: center; font: 800 15pt 'Inter'; letter-spacing: -.01em; }
+  .runhead .n { font: 600 8pt 'JetBrains Mono'; color: #fff; background: var(--indigo); padding: 2px 7px; border-radius: 3px; margin-right: 8px; }
+  .runhead .tag { font: 600 7.4pt 'JetBrains Mono'; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .runhead.next { margin-top: 16px; }
+  .block { margin-top: 11px; }
+  .lbl { font: 700 7.8pt 'Inter'; letter-spacing: .06em; text-transform: uppercase; color: var(--indigo); margin-bottom: 5px; }
+
+  .rec { margin: 13px 0 12px; background: var(--ink); color: #fff; border-radius: 6px; padding: 13px 16px; display: grid; grid-template-columns: 1.05in 1fr; gap: 12px; }
+  .rec b.k { font: 600 7.5pt 'JetBrains Mono'; letter-spacing: .12em; text-transform: uppercase; color: var(--lime); padding-top: 2px; }
+  .rec p { font-size: 10.2pt; }
+
+  .principles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .principles div { border-top: 3px solid var(--indigo); background: var(--paper); padding: 9px 10px 10px; border-radius: 0 0 4px 4px; font-size: 8.8pt; line-height: 1.34; }
+  .principles .num { font: 600 7.4pt 'JetBrains Mono'; color: var(--indigo); }
+  .principles b { display: block; font: 800 12pt 'Inter'; letter-spacing: -.01em; margin: 1px 0 4px; }
+
+  .toc { list-style: none; padding: 0; columns: 2; column-gap: 22px; }
+  .toc li { break-inside: avoid; display: grid; grid-template-columns: 24px 1fr 22px; padding: 4px 0; border-bottom: 1px solid var(--hair-2); margin: 0; font-size: 9pt; }
+  .toc li span { font: 600 8pt 'JetBrains Mono'; color: var(--indigo); padding-top: 1px; }
+  .toc li i { font: 500 7.6pt 'JetBrains Mono'; color: var(--muted); font-style: normal; text-align: right; padding-top: 1px; }
+  .toc li b { font-weight: 600; }
+
+  .glance { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .glance div { padding: 2px 10px 2px 0; } .glance div + div { padding-left: 10px; border-left: 1px solid var(--hair); }
+  .glance b { display: block; font: 800 17pt/1.1 'Inter'; letter-spacing: -.02em; }
+  .glance span { font-size: 8.5pt; color: var(--muted); }
+
+  .ladder { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .ladder .rung { border: 1.5px solid var(--ink); padding: 8px 10px 9px; background: #fff; font-size: 8.5pt; line-height: 1.3; }
+  .ladder .rung + .rung { border-left: none; }
+  .ladder .rung .lv { font: 600 7.2pt 'JetBrains Mono'; letter-spacing: .1em; text-transform: uppercase; color: var(--indigo); }
+  .ladder .rung b { display: block; font: 700 10pt 'Inter'; margin: 2px 0 3px; }
+  .ladder .rung .ex { display: block; margin-top: 5px; padding-top: 5px; border-top: 1px dashed var(--hair); font: 500 7.9pt 'JetBrains Mono'; }
+  .ladder .rung:nth-child(1) { background: var(--ink); color: #fff; } .ladder .rung:nth-child(1) .lv { color: var(--lime); } .ladder .rung:nth-child(1) .ex { border-top-color: #4a4a58; }
+  .ladder .rung:nth-child(2) { background: var(--indigo-wash); }
+  .ladder .rung:nth-child(4) { background: var(--lime); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 8.7pt; }
+  th { text-align: left; font: 600 7.2pt 'Inter'; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding: 0 8px 4px 0; border-bottom: 1px solid var(--ink); }
+  td { padding: 4px 8px 4px 0; border-bottom: 1px solid var(--hair-2); vertical-align: top; line-height: 1.32; }
+  td b { font-weight: 600; }
+  .mono { font: 500 8pt 'JetBrains Mono'; }
+  .lim { font: 600 7.8pt 'JetBrains Mono'; color: var(--indigo); white-space: nowrap; }
+
+  /* rule rows: rule text + correct + incorrect */
+  .rule { display: grid; grid-template-columns: 2.05in 1fr 1fr; gap: 7px; padding: 5px 0; border-top: 1px solid var(--hair); }
+  .rule.first { border-top: 2px solid var(--ink); }
+  .rule .k { font-size: 8.5pt; line-height: 1.32; }
+  .rule .k b { display: block; font: 700 9pt 'Inter'; margin-bottom: 1px; }
+  .rule .k .n { font: 600 7.4pt 'JetBrains Mono'; color: var(--indigo); margin-right: 4px; }
+  .do, .dont { font-size: 8.5pt; line-height: 1.32; padding: 5px 8px 6px; border-radius: 4px; }
+  .do { background: var(--lime-wash); border-left: 3px solid var(--lime-deep); }
+  .dont { background: var(--coral-wash); border-left: 3px solid var(--coral); }
+  .do::before, .dont::before { display: block; font: 600 6.8pt 'JetBrains Mono'; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 1px; }
+  .do::before { content: '✓ Correct'; color: var(--lime-deep); }
+  .dont::before { content: '✕ Incorrect'; color: var(--coral); }
+  .do em, .dont em { display: block; font-style: normal; color: var(--muted); font-size: 7.9pt; margin-top: 2px; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; }
+  .chip { font: 500 8pt 'JetBrains Mono'; padding: 2px 7px; border-radius: 3px; background: var(--coral-wash); color: var(--coral); }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .numl { counter-reset: n; list-style: none; padding: 0; }
+  .numl li { counter-increment: n; display: grid; grid-template-columns: 22px 1fr; padding: 3px 0; border-bottom: 1px solid var(--hair-2); margin: 0; font-size: 8.7pt; line-height: 1.32; }
+  .numl li::before { content: counter(n, decimal-leading-zero); font: 600 7.4pt 'JetBrains Mono'; color: var(--indigo); padding-top: 1px; }
+  .chk { list-style: none; padding: 0; }
+  .chk li { display: grid; grid-template-columns: 18px 1fr; padding: 3px 0; border-bottom: 1px solid var(--hair-2); margin: 0; font-size: 8.6pt; line-height: 1.3; }
+  .chk li::before { content: '☐'; color: var(--indigo); font-size: 10pt; line-height: 1; }
+
+  /* formulas */
+  .formula { display: grid; gap: 0; }
+  .formula div { padding: 6px 9px 7px; font-size: 8.4pt; line-height: 1.3; border: 1.5px solid var(--ink); }
+  .formula div + div { border-left: none; }
+  .formula div b { display: block; font: 600 7pt 'JetBrains Mono'; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 2px; }
+  .f1 { background: var(--paper); } .f2 { background: var(--indigo-wash); } .f3 { background: var(--lime-wash); } .f4 { background: var(--amber-wash); }
+  .sample { margin-top: 5px; font-size: 8.9pt; line-height: 1.45; padding: 7px 11px; border-left: 3px solid var(--ink); }
+  .h1 { background: var(--paper); } .h2 { background: var(--indigo-wash); } .h3 { background: var(--lime-wash); } .h4 { background: var(--amber-wash); }
+  .count { font: 600 7.3pt 'JetBrains Mono'; color: var(--muted); margin-top: 3px; }
+  .note { background: var(--paper); border-radius: 5px; padding: 7px 11px; font-size: 8.9pt; }
+  .flag { background: var(--amber-wash); border-left: 3px solid var(--amber); padding: 6px 10px; font-size: 8.8pt; }
+
+  /* anatomy */
+  .anat { display: grid; grid-template-columns: 2.7in 1fr; gap: 14px; }
+  .wire { border: 1.5px solid var(--ink); border-radius: 6px; padding: 9px; }
+  .wire .bar { height: 6px; background: var(--hair-2); border-radius: 2px; margin-bottom: 4px; }
+  .wire .z { position: relative; border: 1.5px dashed #b8b6c9; border-radius: 4px; padding: 5px 7px 5px 25px; margin-bottom: 5px; }
+  .pin { display: inline-block; width: 15px; height: 15px; border-radius: 50%; background: var(--indigo); color: #fff; font: 700 7.4pt/15px 'Inter'; text-align: center; }
+  .wire .z .pin { position: absolute; left: 5px; top: 5px; }
+  .wire .z.t .bar { height: 10px; background: var(--ink); width: 75%; }
+  .wire .z.s .bar { width: 55%; background: #c9c7d9; }
+  .wire .benefits { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
+  .wire .benefits div { border: 1px solid var(--hair); border-radius: 3px; padding: 3px; }
+  .wire .benefits div .bar:first-child { background: var(--indigo-wash); }
+  .wire .diag { display: flex; align-items: center; gap: 4px; }
+  .wire .diag span { width: 20px; height: 20px; border: 1.5px solid var(--ink); border-radius: 3px; flex: none; }
+  .wire .diag i { flex: 1; height: 1.5px; background: var(--ink); }
+
+  /* diagram do/don't */
+  .dd { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .dd > div { border-radius: 5px; padding: 7px 10px 8px; }
+  .dd .ok { background: var(--lime-wash); border: 1.5px solid var(--lime-deep); }
+  .dd .no { background: var(--coral-wash); border: 1.5px solid var(--coral); }
+  .dd .cap { font: 600 7pt 'JetBrains Mono'; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 3px; }
+  .dd .ok .cap { color: var(--lime-deep); } .dd .no .cap { color: var(--coral); }
+  .dd svg { display: block; width: 100%; height: 84px; }
+  .dd ul { font-size: 8.2pt; line-height: 1.3; margin-top: 3px; }
+
+  /* pillar edit */
+  .pillar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .qa { border: 1.5px solid var(--ink); border-radius: 5px; overflow: hidden; }
+  .qa .h { background: var(--ink); color: #fff; font: 600 7pt 'JetBrains Mono'; letter-spacing: .1em; text-transform: uppercase; padding: 4px 9px; }
+  .qa .h.lime { background: var(--lime); color: var(--ink); }
+  .qa .r { display: grid; grid-template-columns: 44px 1fr; border-top: 1px solid var(--hair); font-size: 8.4pt; line-height: 1.32; }
+  .qa .r b { font: 600 7.2pt 'JetBrains Mono'; letter-spacing: .06em; text-transform: uppercase; padding: 5px 0 5px 9px; }
+  .qa .r span { padding: 5px 9px 5px 0; }
+  .qa .final { padding: 7px 10px; font-size: 8.8pt; line-height: 1.42; }
+
+  .flow { display: flex; align-items: stretch; }
+  .flow .b { flex: 1; border: 1.5px solid var(--ink); border-radius: 5px; padding: 7px 9px; font-size: 8.4pt; line-height: 1.3; background: #fff; }
+  .flow .b b { display: block; font: 600 7pt 'JetBrains Mono'; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+  .flow .b.dark { background: var(--ink); color: #fff; } .flow .b.dark b { color: var(--lime); }
+  .flow .b.ind { background: var(--indigo-wash); border-color: var(--indigo); }
+  .flow .arr { display: flex; align-items: center; padding: 0 5px; font: 700 11pt 'Inter'; }
+
+  .sliders { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+  .sl { font-size: 8.4pt; }
+  .sl .ends { display: flex; justify-content: space-between; font: 600 7.2pt 'JetBrains Mono'; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .sl .track { position: relative; height: 6px; background: var(--hair-2); border-radius: 3px; margin: 4px 0 3px; }
+  .sl .track i { position: absolute; top: -4px; width: 14px; height: 14px; border-radius: 50%; background: var(--indigo); border: 2px solid #fff; box-shadow: 0 0 0 1.5px var(--indigo); }
+  .sl .why { color: var(--muted); line-height: 1.3; }
+
+  .qr { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .qr div { background: var(--paper); border-radius: 4px; padding: 6px 9px 7px; font-size: 8.3pt; line-height: 1.32; }
+  .qr div b { display: block; font: 700 8.8pt 'Inter'; margin-bottom: 2px; }
+  .qr .mono { font-size: 7.6pt; }
+
+  .prod { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .prod a { display: block; border: 1.5px solid var(--ink); border-radius: 6px; padding: 10px 12px 11px; color: var(--ink); }
+  .prod a .k { font: 600 7.2pt 'JetBrains Mono'; letter-spacing: .1em; text-transform: uppercase; color: var(--indigo); }
+  .prod a b { display: block; font: 800 11.5pt 'Inter'; letter-spacing: -.01em; margin: 2px 0 3px; }
+  .prod a span { display: block; font-size: 8.6pt; color: var(--muted); line-height: 1.32; }
+  .prod a .url { font: 500 7.8pt 'JetBrains Mono'; color: var(--indigo); margin-top: 5px; }
+
+  .foot { position: absolute; bottom: 0.32in; left: 0.6in; right: 0.6in; display: flex; justify-content: space-between; font: 500 7.5pt 'JetBrains Mono'; color: #8a8a98; }
+</style></head><body>
+
+<!-- ============ PAGE 1: COVER ============ -->
+<section class="page">
+  <span class="banner">Portfolio sample &middot; anonymized &middot; "Northwind" stands in for the cloud platform</span>
+  <h1>Use Case-Led Style Guide<br>for a Solutions Library</h1>
+  <div class="meta">The naming, writing, and diagram standards for a cloud solutions library: implementation guides, architecture diagrams, and solution pages written by 300+ solutions architects and specialists. Internal tools, names, and approval paths are removed. The rules themselves are unchanged.</div>
+
+  <div class="rec"><b class="k">The one rule</b><p><b>It is product information, not marketing copy.</b> A reader who is not technical should be able to tell from one page whether a solution fits their organization. Every rule in this guide serves that test.</p></div>
+
+  <div class="glance">
+    <div><b>300+</b><span>contributors writing to one standard</span></div>
+    <div><b>2M+</b><span>monthly page views on the library</span></div>
+    <div><b>6 &rarr; 2 wks</b><span>time to publish after the rules moved into the pipeline</span></div>
+    <div><b>9 wks</b><span>editorial backlog cleared</span></div>
+  </div>
+
+  <div class="block" style="margin-top:14px">
+    <div class="lbl">Four principles</div>
+    <div class="principles">
+      <div><span class="num">01</span><b>Plain</b>Use the words a customer types into a search engine. Define a term or drop it.</div>
+      <div><span class="num">02</span><b>Brief</b>Pay for every word. 25 words or fewer per sentence. The point goes first.</div>
+      <div><span class="num">03</span><b>Specific</b>Name the component, the number, and the source. No weasel words or unsourced superlatives.</div>
+      <div><span class="num">04</span><b>Usable</b>Write for people who skim. Lists over blocks, real headings, descriptive links.</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="lbl">How to use this guide</div>
+    <p class="sub" style="margin-bottom:5px">Find the section for the asset you are writing. Then keep section 08 open while you write.</p>
+    <ol class="toc">
+      <li><span>01</span><div><b>Taxonomy.</b> The four-level model</div><i>p2</i></li>
+      <li><span>02</span><div><b>Naming formats.</b> Titles and limits</div><i>p2</i></li>
+      <li><span>03</span><div><b>Naming rules.</b> Solution areas and use cases</div><i>p3</i></li>
+      <li><span>04</span><div><b>Naming rules.</b> Solutions, guidance, partners</div><i>p4</i></li>
+      <li><span>05</span><div><b>Descriptions.</b> Three formulas</div><i>p5</i></li>
+      <li><span>06</span><div><b>Solution pages and diagrams</b></div><i>p6</i></li>
+      <li><span>07</span><div><b>Steps, pillars, and guides</b></div><i>p7</i></li>
+      <li><span>08</span><div><b>Writing standards</b></div><i>p8</i></li>
+      <li><span>09</span><div><b>Grammar and punctuation</b></div><i>p9</i></li>
+      <li><span>&rarr;</span><div><b>How it runs, and live examples</b></div><i>p9</i></li>
+    </ol>
+  </div>
+
+  <div class="block">
+    <div class="lbl">Who it serves</div>
+    <div class="note">Solutions architects and specialists who build architectures and write the content that explains them. Most are engineers first and writers second. That is why every rule here comes with a correct and an incorrect example: contributors learn faster by comparing two versions than by reading a principle.</div>
+  </div>
+
+  <div class="foot"><span>Use Case-Led Style Guide &middot; Anonymized</span><span>Co-authored by Danielle Chauncey &middot; 1 / 9</span></div>
+</section>
+
+<!-- ============ PAGE 2: TAXONOMY + FORMATS ============ -->
+<section class="page">
+  <div class="runhead"><h2><span class="n">01</span>Taxonomy</h2><span class="tag">Start here</span></div>
+  <p>The library holds four solution types: platform services, packaged solutions, partner solutions, and guidance. Each one maps to a use case. Each use case sits in a solution area, and each solution area sits in a domain. Name from the top down: the use case name should fit its solution area, and the solution area should reflect its domain.</p>
+
+  <div class="ladder" style="margin-top:9px">
+    <div class="rung"><span class="lv">Level 1</span><b>Domain</b>An industry or a technology field.<span class="ex">Financial Services</span></div>
+    <div class="rung"><span class="lv">Level 2</span><b>Solution area</b>Related use cases for one buyer or one technology category.<span class="ex">Trade Lifecycle Modernization</span></div>
+    <div class="rung"><span class="lv">Level 3</span><b>Use case</b>One customer problem or opportunity.<span class="ex">Regulatory Reporting</span></div>
+    <div class="rung"><span class="lv">Level 4</span><b>Solution type</b>The asset: solution, guidance, partner offer, or service.<span class="ex">Guidance for Regulatory Reporting on Northwind</span></div>
+  </div>
+  <p class="sub" style="margin-top:5px">Industry domains can add a sub-domain for a customer segment, such as Financial Services &rsaquo; Capital Markets.</p>
+
+  <div class="runhead next"><h2><span class="n">02</span>Naming formats</h2><span class="tag">Titles are search terms</span></div>
+  <p style="margin-bottom:7px">Customers were confused about what counts as a "solution," because many assets used the word. One naming system fixed that. Use these formats for every new title.</p>
+  <table>
+    <tr><th style="width:15%">Content type</th><th>Format</th><th style="width:13%">Limit</th><th style="width:31%">Examples</th></tr>
+    <tr><td><b>Solution area</b></td><td>Nouns for a set of related use cases. Industry areas align to a business function. Technology areas align to a technical category.</td><td class="lim">~50 chars</td><td class="mono">Privacy-Enhanced Data Collaboration<br>Language Understanding</td></tr>
+    <tr><td><b>Use case</b></td><td>Nouns for the customer problem or opportunity</td><td class="lim">~50 chars</td><td class="mono">Customer 360 Profiles<br>Data Clean Rooms</td></tr>
+    <tr><td><b>Solution</b></td><td><span class="mono">[Use Case] on Northwind</span> or <span class="mono">[Use Case] with/for [Service]</span>. With a third party: <span class="mono">[Use Case] for [Third Party] on Northwind</span></td><td class="lim">~55 chars</td><td class="mono">Automated Data Analytics on Northwind<br>Data Analytics for Acme on Northwind</td></tr>
+    <tr><td><b>Guidance</b></td><td><span class="mono">Guidance for [Use Case] on Northwind</span> or <span class="mono">using/with [Service]</span>. Extra room for the required words.</td><td class="lim">~70 chars</td><td class="mono">Guidance for Contextual Intelligence for Advertising on Northwind</td></tr>
+    <tr><td><b>Partner</b></td><td>The partner names its own offer. Suggested patterns: <span class="mono">[Product]</span>, <span class="mono">[Product] [Use Case]</span>, <span class="mono">[Use Case] with [Product]</span>, <span class="mono">[Product] for [Service]</span></td><td class="lim">Partner&rsquo;s call</td><td class="mono">Edit in the Cloud with Acme</td></tr>
+  </table>
+
+  <div class="block two">
+    <div>
+      <div class="lbl">Every title</div>
+      <ul class="numl">
+        <li>Plain, descriptive nouns. No hype or claims you cannot prove.</li>
+        <li>Title case. "And," never an ampersand.</li>
+        <li>No slashes or dashes.</li>
+        <li>One form of an acronym. Introduce the other in the first sentence of the page.</li>
+        <li>Check search volume before you pick between two terms.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="lbl">Why limits matter</div>
+      <div class="note">Titles render on library cards, search results, and navigation. Past about 50 characters they wrap or truncate, and the words that get cut are usually the ones a customer searched for. Limits exclude spaces unless the rule says otherwise.</div>
+    </div>
+  </div>
+
+  <div class="foot"><span>Use Case-Led Style Guide &middot; Anonymized</span><span>Co-authored by Danielle Chauncey &middot; 2 / 9</span></div>
+</section>
+
+<!-- ============ PAGE 3: SOLUTION AREA + USE CASE RULES ============ -->
+<section class="page">
+  <div class="runhead"><h2><span class="n">03</span>Naming solution areas and use cases</h2><span class="tag">Rules with examples</span></div>
+
+  <div class="lbl">Solution areas</div>
+  <div class="rule first">
+    <div class="k"><b><span class="n">01</span>Broader than a use case</b>A set of related priority workloads. Never shares a name with one of its use cases.</div>
+    <div class="do">Financial Services &rsaquo; Trade Lifecycle Modernization<em>Right level. Narrower names become its use cases.</em></div>
+    <div class="dont">Financial Services &rsaquo; Regulatory Reporting<em>Too granular. This is a use case.</em></div>
+  </div>
+  <div class="rule">
+    <div class="k"><b><span class="n">02</span>One owner or one category</b>Industry areas map to one cost center with one buyer. Technology areas map to one category.</div>
+    <div class="do">Manufacturing &rsaquo; Engineering and Design<em>Owned by the VP of Engineering.</em></div>
+    <div class="dont">Finance, IT, and Core Systems<em>Three cost centers in one name.</em></div>
+  </div>
+  <div class="rule">
+    <div class="k"><b><span class="n">03</span>Customer language, unbranded</b>Platform-agnostic terms a customer would use. No code names or "frameworks."</div>
+    <div class="do">Clinical Drug Development</div>
+    <div class="dont">Project Lind<em>An internal code word no customer knows.</em></div>
+  </div>
+  <div class="rule">
+    <div class="k"><b><span class="n">04</span>Say what problems it solves</b>Industry areas name the business concern, not a generic workload.</div>
+    <div class="do">Financial Services &rsaquo; Data Risk and Analytics</div>
+    <div class="dont">Generative AI &middot; Migrations &middot; IT Systems<em>Too broad to signal a business problem.</em></div>
+  </div>
+  <div class="rule">
+    <div class="k"><b><span class="n">05</span>Segments are sub-domains</b>A slice of customers within an industry is not a solution area.</div>
+    <div class="do">Financial Services &rsaquo; <i>sub-domain</i> Capital Markets</div>
+    <div class="dont">Financial Services &rsaquo; <i>solution area</i> Capital Markets</div>
+  </div>
+
+  <div class="lbl" style="margin-top:12px">Use cases</div>
+  <div class="rule first">
+    <div class="k"><b><span class="n">01</span>The problem, not the product</b>Center what the customer solves.</div>
+    <div class="do">Document Processing</div>
+    <div class="dont">Object Storage for Document Storage</div>
+  </div>
+  <div class="rule">
+    <div class="k"><b><span class="n">02</span>Industry terms, no internal terms</b>Never repeat a use case across areas in one domain. Pick the primary buyer.</div>
+    <div class="do">Satellite Communications</div>
+    <div class="dont">Day One Innovation for Low Earth Orbit Communications<em>Internal slogan. Nobody searches for it.</em></div>
+  </div>
+  <div class="rule">
+    <div class="k"><b><span class="n">03</span>Descriptive, not persuasive</b>No "world-class," "next-generation," or "2.0."</div>
+    <div class="do">Website Performance and Security</div>
+    <div class="dont">100% Uptime Website Performance &amp; World-class Security<em>Unprovable claim, hyperbole, ampersand.</em></div>
+  </div>
+  <div class="rule">
+    <div class="k"><b><span class="n">04</span>Nouns, third person, title case</b>"And," not "&amp;." No slashes or dashes.</div>
+    <div class="do">Enterprise Reporting and Analytics</div>
+    <div class="dont">Creating Enterprise Reports and Analyzing Data<em>Verbs describe actions, not problems.</em></div>
+  </div>
+  <div class="rule">
+    <div class="k"><b><span class="n">05</span>Plural when you can</b>If both forms work, choose the plural.</div>
+    <div class="do">Sustainable Buildings</div>
+    <div class="dont">Sustainable Building</div>
+  </div>
+
+  <div class="foot"><span>Use Case-Led Style Guide &middot; Anonymized</span><span>Co-authored by Danielle Chauncey &middot; 3 / 9</span></div>
+</section>
+
+<!-- ============ PAGE 4: SOLUTION + GUIDANCE NAMING ============ -->
+<section class="page">
+  <div class="runhead"><h2><span class="n">04</span>Naming solutions, guidance, and partner offers</h2><span class="tag">Rules with examples</span></div>
+
+  <div class="lbl">Packaged solutions</div>
+  <div class="rule first">
+    <div class="k"><b><span class="n">01</span>A specific use case or outcome</b>Easy to find, and named for what deploying it gets you.</div>
+    <div class="do">Automated Security Response on Northwind</div>
+    <div class="dont">Security on Northwind<em>A topic, not a problem.</em></div>
+  </div>
+  <div class="rule">
+    <div class="k"><b><span class="n">02</span>Don't sound like a service</b>Avoid words that imply a product: engine, automator, core, maker, registry, detector.</div>
+    <div class="do">Media Insights on Northwind</div>
+    <div class="dont">Northwind Media Insights Engine</div>
+  </div>
+  <div class="rule">
+    <div class="k"><b><span class="n">03</span>No platform brand up front</b>A brand prefix makes a solution read like an official service. It needs executive sign-off.</div>
+    <div class="do">Security Automations for Northwind Firewall</div>
+    <div class="dont">Northwind Security Automations</div>
+  </div>
+  <div class="rule">
+    <div class="k"><b><span class="n">04</span>Keep the product's own name</b>A platform-owned solution that runs a third-party product uses that product's name.</div>
+    <div class="do">Acme Server for Northwind</div>
+    <div class="dont">Running the Server for Acme on the Northwind Cloud</div>
+  </div>
+  <div class="rule">
+    <div class="k"><b><span class="n">05</span>One solution, one name</b>Multiple deployment options get descriptions, not names.</div>
+    <div class="do">Live Streaming on Northwind<em>One name, two reference architectures.</em></div>
+    <div class="dont">Live Streaming on Northwind and Live Streaming on Northwind with Object Storage</div>
+  </div>
+  <div class="rule">
+    <div class="k"><b><span class="n">06</span>One form of an acronym</b>No parentheses in titles.</div>
+    <div class="do">IoT Device Simulator</div>
+    <div class="dont">Protecting Workloads from Distributed Denial of Service (DDoS) Attacks</div>
+  </div>
+
+  <div class="lbl" style="margin-top:12px">Guidance</div>
+  <div class="rule first">
+    <div class="k"><b><span class="n">01</span>The full format</b>Starts with "Guidance for," ends with the platform or service.</div>
+    <div class="do">Guidance for Baseline Security Assessment on Northwind</div>
+    <div class="dont">Baseline Security Assessment</div>
+  </div>
+  <div class="rule">
+    <div class="k"><b><span class="n">02</span>The right format is not enough</b>It still needs a specific use case.</div>
+    <div class="do">Guidance for Near Real-Time Fraud Detection on Northwind</div>
+    <div class="dont">Guidance for Security on Northwind</div>
+  </div>
+  <div class="rule">
+    <div class="k"><b><span class="n">03</span>Concise for search</b>Descriptive words, nothing extra. One acronym form.</div>
+    <div class="do">Guidance for Building an Agricultural Sensor Network using IoT</div>
+    <div class="dont">Guidance for Securing Workloads with Multi-Factor Authentication (MFA) on Northwind</div>
+  </div>
+
+  <div class="block">
+    <div class="lbl">Partner offers</div>
+    <div class="note">Partners own and name their offers. Pick a name a buyer could identify on sight: the brand or manufacturer, in title case, with no hype. Putting the platform's brand on a partner offer ("on Northwind," "powered by Northwind") is reserved for strategic partners and needs executive approval.</div>
+  </div>
+
+  <div class="foot"><span>Use Case-Led Style Guide &middot; Anonymized</span><span>Co-authored by Danielle Chauncey &middot; 4 / 9</span></div>
+</section>
+
+<!-- ============ PAGE 5: DESCRIPTIONS ============ -->
+<section class="page">
+  <div class="runhead"><h2><span class="n">05</span>Three description formulas</h2><span class="tag">Use case &middot; Solution area &middot; Guidance</span></div>
+  <p>Descriptions are objective and informative, never persuasive. Write for a CIO and a developer at once, at a 100 to 200 technical level. Use the SEO terms from your marketing lead.</p>
+
+  <div class="block">
+    <div class="lbl">A &middot; Use case description &middot; 75&ndash;80 words max</div>
+    <div class="formula" style="grid-template-columns:2fr 1.5fr 2fr">
+      <div class="f1"><b>1&ndash;2 sentences &middot; Challenge</b>The problem or opportunity, without talking down to the reader.</div>
+      <div class="f2"><b>1 sentence &middot; Approach</b>"[Use case] solutions on Northwind help customers..."</div>
+      <div class="f3"><b>1&ndash;2 sentences &middot; Benefit</b>The business outcome. Stay out of the technical weeds.</div>
+    </div>
+    <div class="sample"><span class="h1">Banks traditionally use legacy systems for core banking applications, such as lending, payments, and deposits. However, these systems are monolithic, expensive, and lack open architecture, which slows the bank's response to market demands.</span> <span class="h2">Using Core Banking System Modernization solutions on Northwind, banks can replace these costly systems with core applications based on open APIs.</span> <span class="h3">With these solutions, banks can reduce system costs, improve their agility, and find new ways to serve their customers.</span></div>
+    <div class="count">Financial Services &rsaquo; Banking &rsaquo; Core Banking System Modernization &middot; 76 words</div>
+  </div>
+
+  <div class="block two">
+    <div>
+      <div class="lbl">Leave out</div>
+      <ul class="numl">
+        <li>Customer names, even if you think they would agree</li>
+        <li>Condescension ("Customers don't understand how to...")</li>
+        <li>Promises or grand statements about results</li>
+        <li>Calls to action ("Click to deploy...")</li>
+        <li>Jargon</li>
+      </ul>
+    </div>
+    <div>
+      <div class="lbl">B &middot; Solution area description &middot; 255 chars max</div>
+      <div class="note" style="margin-bottom:5px"><span class="mono" style="color:var(--indigo)">Solutions to help [persona] achieve [benefits]</span><br>Business areas name a business leader (CMO, VP of Supply Chain). Technical areas name a technical leader (CTO, VP of Engineering).</div>
+      <div class="sample" style="margin-top:0">Solutions to enable the chief technology officer to create flexible, remote studios and deploy GPU-powered workstations, allowing artists and designers to work on multiple large files in the cloud.</div>
+      <div class="count">Games &rsaquo; Cloud Game Development &middot; 199 characters</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="lbl">C &middot; Guidance description &middot; customer-centric, four moves</div>
+    <div class="formula" style="grid-template-columns:repeat(4,1fr)">
+      <div class="f1"><b>01 &middot; Open</b>"This Guidance demonstrates..." plus the value to the customer, not the service.</div>
+      <div class="f2"><b>02 &middot; Components</b>What the architecture includes, in terms the target user recognizes.</div>
+      <div class="f3"><b>03 &middot; Benefits</b>Security, scale, cost, or operations, tied to this use case.</div>
+      <div class="f4"><b>04 &middot; Flexibility</b>How to extend it for the customer's own needs.</div>
+    </div>
+    <div class="sample"><span class="h1">This Guidance demonstrates how to deploy a resilient video discovery server architecture within a private network.</span> <span class="h2">The included infrastructure template provisions a pair of compute instances across two availability zones, then downloads and installs the discovery software.</span> <span class="h3">This foundation lets you add live video transport to your environment and supports broadcast workflows such as live cloud production.</span> <span class="h4">The Guidance is extensible, so you can add components or connect other services as your workflows change.</span></div>
+  </div>
+
+  <div class="foot"><span>Use Case-Led Style Guide &middot; Anonymized</span><span>Co-authored by Danielle Chauncey &middot; 5 / 9</span></div>
+</section>
+
+<!-- ============ PAGE 6: PAGES + DIAGRAMS ============ -->
+<section class="page">
+  <div class="runhead"><h2><span class="n">06</span>Solution pages and architecture diagrams</h2><span class="tag">Layout and visuals</span></div>
+  <p>Solution pages are deeply technical, so they need extra care to stay readable. Readers skim and scan. Put the important point in the first sentence of each paragraph, break text into lists, and keep each component within its limit.</p>
+
+  <div class="anat" style="margin-top:9px">
+    <div class="wire">
+      <div class="z t"><span class="pin">1</span><div class="bar"></div></div>
+      <div class="z s"><span class="pin">2</span><div class="bar"></div></div>
+      <div class="z"><span class="pin">3</span><div class="bar"></div><div class="bar"></div><div class="bar" style="width:80%"></div></div>
+      <div class="z"><span class="pin">4</span><div class="benefits"><div><div class="bar"></div><div class="bar"></div></div><div><div class="bar"></div><div class="bar"></div></div><div><div class="bar"></div><div class="bar"></div></div></div></div>
+      <div class="z"><span class="pin">5</span><div class="bar" style="width:70%"></div><div class="diag"><span></span><i></i><span></span><i></i><span></span><i></i><span></span></div></div>
+      <div class="z"><span class="pin">6</span><div class="bar" style="width:90%"></div><div class="bar" style="width:84%"></div><div class="bar" style="width:70%"></div></div>
+    </div>
+    <table>
+      <tr><th></th><th>Component</th><th>Rule</th><th>Limit</th></tr>
+      <tr><td><span class="pin">1</span></td><td><b>Title</b></td><td>Solution naming format</td><td class="lim">~55 chars</td></tr>
+      <tr><td><span class="pin">2</span></td><td><b>Short description</b></td><td>The subhead. High-level benefits for search.</td><td class="lim">70 chars</td></tr>
+      <tr><td><span class="pin">3</span></td><td><b>Overview</b></td><td>Business value for technical and non-technical readers. No solution name, no links.</td><td class="lim">50&ndash;150 words</td></tr>
+      <tr><td><span class="pin">4</span></td><td><b>Benefits</b></td><td>Header plus support. No links.</td><td class="lim">2&ndash;4 &middot; 20&ndash;40 chars &middot; 50 words</td></tr>
+      <tr><td><span class="pin">5</span></td><td><b>Architecture</b></td><td>Intro describes the architecture only. White-background PNG or SVG, no step text in the image.</td><td class="lim">1 diagram</td></tr>
+      <tr><td><span class="pin">6</span></td><td><b>Steps</b></td><td>Short, descriptive, one action each</td><td class="lim">10&ndash;20 words</td></tr>
+    </table>
+  </div>
+
+  <div class="block">
+    <div class="lbl">Architecture diagrams</div>
+    <div class="dd">
+      <div class="ok">
+        <div class="cap">✓ Correct</div>
+        <svg viewBox="0 0 300 84" font-family="Inter" font-size="8.5">
+          <g fill="#fff" stroke="#17171d" stroke-width="1.5">
+            <rect x="8" y="27" width="44" height="30" rx="3"/><rect x="92" y="27" width="44" height="30" rx="3"/>
+            <rect x="176" y="5" width="44" height="30" rx="3"/><rect x="176" y="50" width="44" height="30" rx="3"/>
+            <rect x="250" y="27" width="44" height="30" rx="3"/>
+          </g>
+          <g stroke="#17171d" stroke-width="1.4" fill="none">
+            <path d="M52 42 H92"/><path d="M136 42 H156 V20 H176"/><path d="M156 42 V65 H176"/>
+            <path d="M220 20 H235 V42 H250"/><path d="M220 65 H235 V42"/>
+          </g>
+          <g fill="#17171d" text-anchor="middle"><text x="30" y="45">Ingest</text><text x="114" y="45">Stream</text><text x="198" y="23">Store</text><text x="198" y="68">Analyze</text><text x="272" y="45">Visualize</text></g>
+        </svg>
+        <ul><li>Approved icons, all one size, every icon labeled</li><li>Solid black arrows, straight lines, right angles</li></ul>
+      </div>
+      <div class="no">
+        <div class="cap">✕ Incorrect</div>
+        <svg viewBox="0 0 300 84" font-family="Inter" font-size="8.5">
+          <g fill="#fff" stroke="#17171d" stroke-width="1.5">
+            <rect x="8" y="8" width="44" height="30" rx="3"/><rect x="100" y="50" width="30" height="22" rx="3"/>
+            <rect x="170" y="4" width="56" height="38" rx="3"/><rect x="190" y="56" width="34" height="24" rx="3"/>
+            <rect x="256" y="30" width="38" height="28" rx="3"/>
+          </g>
+          <g stroke="#8f2615" stroke-width="1.5" fill="none" stroke-dasharray="3 2">
+            <path d="M52 23 L190 68"/><path d="M52 30 L100 61"/><path d="M130 61 L170 23"/><path d="M226 23 L256 44"/><path d="M224 68 L170 28"/>
+          </g>
+          <g fill="#17171d" text-anchor="middle"><text x="30" y="26">Ingest</text><text x="198" y="26">Store</text><text x="275" y="47">BI</text></g>
+        </svg>
+        <ul><li>Mixed icon sizes, two unlabeled</li><li>Dotted, diagonal, crossing arrows</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="block two">
+    <div>
+      <div class="lbl">Build rules</div>
+      <ul class="numl">
+        <li>Use the approved template and the current icon set only.</li>
+        <li>Don't crop, flip, rotate, or reshape icons.</li>
+        <li>Labels fit on two lines, never break mid-word, 9 pt minimum. The brand stays on the same line as the service name.</li>
+        <li>Short names in the diagram. Long names in the steps.</li>
+        <li>Flow left to right, top to bottom, or clockwise.</li>
+        <li>No third-party logos without written legal approval.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="lbl">Checklist before you submit</div>
+      <ul class="chk">
+        <li>Template and approved icons used</li>
+        <li>All icons the same size</li>
+        <li>Every icon labeled, including gateways and endpoints</li>
+        <li>Perpendicular arrows, none crossing</li>
+        <li>Every service in the diagram appears in the steps</li>
+        <li>Third-party approvals on file</li>
+        <li>File named for the title, minus "Guidance for"</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="foot"><span>Use Case-Led Style Guide &middot; Anonymized</span><span>Co-authored by Danielle Chauncey &middot; 6 / 9</span></div>
+</section>
+
+<!-- ============ PAGE 7: STEPS + PILLARS + GUIDES ============ -->
+<section class="page">
+  <div class="runhead"><h2><span class="n">07</span>Steps, pillars, and implementation guides</h2><span class="tag">The technical layer</span></div>
+
+  <div class="lbl">Narrative steps</div>
+  <div class="rule first">
+    <div class="k"><b><span class="n">01</span>Present tense, imperative</b>Commands. Never "will."</div>
+    <div class="do">Create the database table.</div>
+    <div class="dont">You will create the database table.</div>
+  </div>
+  <div class="rule">
+    <div class="k"><b><span class="n">02</span>Active voice</b>Name the actor. Cut "is used."</div>
+    <div class="do">Capture data from social media feeds. The streaming service sends it to the cloud.</div>
+    <div class="dont">The streaming service is used to send social media data to the cloud.</div>
+  </div>
+  <div class="rule">
+    <div class="k"><b><span class="n">03</span>Name the reader</b>"You" if the reader is the user. Otherwise a role, never "users."</div>
+    <div class="do">Data scientists analyze data from the stream.</div>
+    <div class="dont">Users analyze data from the stream.</div>
+  </div>
+  <p class="sub" style="margin-top:4px">Also: define acronyms at first mention. Bold and link the full service name at first mention, then use the short name in bold.</p>
+
+  <div class="block">
+    <div class="lbl">Architecture pillars &middot; answer what, how, and why for each of six pillars</div>
+    <div class="pillar">
+      <div class="qa">
+        <div class="h">Contributor draft &middot; Cost optimization</div>
+        <div class="r"><b>What</b><span>Data integration service, key-value database</span></div>
+        <div class="r"><b>How</b><span>Integration jobs run in the largest batch size allowed. A time-to-live (TTL) setting deletes expired items without consuming write capacity.</span></div>
+        <div class="r"><b>Why</b><span>Large batches minimize transaction costs. TTL means you don't pay to store data you no longer need.</span></div>
+      </div>
+      <div class="qa">
+        <div class="h lime">After the writers' edit</div>
+        <div class="final">Integration jobs run in the largest batch size allowed to minimize transaction costs. The database's time-to-live (TTL) setting deletes expired items at an interval you set, without consuming write capacity, so you don't pay to store data you no longer need.</div>
+        <div class="r" style="grid-template-columns:1fr"><span style="padding:5px 10px;color:var(--muted)">Three answers become one paragraph. Each fact connects to its benefit, and the "why" never stands alone.</span></div>
+      </div>
+    </div>
+    <div class="two" style="margin-top:7px">
+      <ul class="numl">
+        <li>Reference specific components in this architecture.</li>
+        <li>Give each pillar its own answer. Cost, performance, and sustainability can't all be "it scales."</li>
+        <li>Don't copy answers from past guidance.</li>
+      </ul>
+      <ul class="numl">
+        <li>Cut anything true of every architecture ("serverless optimizes resources").</li>
+        <li>Describe what exists today. No future or aspirational features.</li>
+        <li>Tie every answer to a business or technical benefit.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="lbl">Implementation guides &middot; flexible, but structured</div>
+    <div class="qr">
+      <div><b>Structure</b>Title matches the diagram. A summary answers who it helps, what it does, and why it exists. Sentence case for H2 and below. No stacked headings. Caption every table and figure.</div>
+      <div><b>Procedures</b>Break a workflow into 7 to 10 steps, with each user decision as its own step. About 15 words per sentence, 25 max. Bold UI terms. No caps or italics for emphasis.</div>
+      <div><b>Nesting</b>Numbers, then lowercase letters, then roman numerals. Combine short paths with angle brackets: <span class="mono">Settings &gt; Roles &gt; Create role</span>. End with revisions and contributor names.</div>
+    </div>
+  </div>
+
+  <div class="foot"><span>Use Case-Led Style Guide &middot; Anonymized</span><span>Co-authored by Danielle Chauncey &middot; 7 / 9</span></div>
+</section>
+
+<!-- ============ PAGE 8: WRITING STANDARDS ============ -->
+<section class="page">
+  <div class="runhead"><h2><span class="n">08</span>Writing standards</h2><span class="tag">Applies to every asset</span></div>
+  <p>The audience runs from developers to CIOs to curious readers, and all of them are busy. Write at an 8th-grade reading level. Research shows it helps adults read faster and retain more. That doesn't mean simpler ideas. It means the ideas cost less effort to understand.</p>
+
+  <div class="block">
+    <div class="lbl">Voice: direct, informative, approachable</div>
+    <div class="sliders">
+      <div class="sl"><div class="ends"><span>Formal</span><span>Casual</span></div><div class="track"><i style="left:58%"></i></div><div class="why">Friendly, but professional enough to earn trust.</div></div>
+      <div class="sl"><div class="ends"><span>Persuasive</span><span>Informative</span></div><div class="track"><i style="left:86%"></i></div><div class="why">State what it does. Let the reader decide.</div></div>
+      <div class="sl"><div class="ends"><span>Expert-only</span><span>Everyone</span></div><div class="track"><i style="left:66%"></i></div><div class="why">A builder and a business leader both follow it.</div></div>
+      <div class="sl"><div class="ends"><span>Hedged</span><span>Certain</span></div><div class="track"><i style="left:72%"></i></div><div class="why">Commit to facts. Never promise outcomes.</div></div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rule first">
+      <div class="k"><b>Jargon</b>Say what you mean or define it. "Deep dive," "out-of-the-box," and "purpose-built" are all jargon.</div>
+      <div class="do">The dashboards let your team review the same data at once, so they can make informed decisions toward team goals.</div>
+      <div class="dont">The dashboards provide a single pane of glass to help you dive deep and move the needle.</div>
+    </div>
+    <div class="rule">
+      <div class="k"><b>Conciseness</b>Imagine you pay for each word. "I emailed you," not "I wrote up an email and sent it."</div>
+      <div class="do">Companies of all sizes want to predict future demand so they can improve the customer experience and increase revenue.</div>
+      <div class="dont">Big, medium, and small companies want to not only understand what their customers are looking for but also what they really need...</div>
+    </div>
+    <div class="rule">
+      <div class="k"><b>Weasel words</b>Vague words hide the claim.</div>
+      <div class="do">Object storage supports variable access patterns. Storage classes set cost by access frequency: daily, monthly, or yearly.</div>
+      <div class="dont">Object storage would help with many of your challenges. You could use some features to store much of your data.</div>
+    </div>
+    <div class="rule">
+      <div class="k"><b>Comparatives</b>Better, faster, easier: than what?</div>
+      <div class="do">This service returns results faster than comparable on-premises services.</div>
+      <div class="dont">This service gives you faster results.</div>
+    </div>
+    <div class="rule">
+      <div class="k"><b>Superlatives</b>Cite a published source, or cut the claim.</div>
+      <div class="do">According to a 2022 industry report, migration cut customer costs by 22% and raised administrator productivity by 66%.</div>
+      <div class="dont">Northwind is the cheapest cloud option with the best performance.</div>
+    </div>
+    <div class="rule">
+      <div class="k"><b>Active voice</b>Subject, verb, object. "We recommend," not "it is recommended."</div>
+      <div class="do">The streaming service sends data from social media feeds to the cloud.</div>
+      <div class="dont">Data is captured from social media feeds and sent to the cloud.</div>
+    </div>
+  </div>
+
+  <div class="block two">
+    <div>
+      <div class="lbl">Flag on sight</div>
+      <div class="chips"><span class="chip">should</span><span class="chip">could</span><span class="chip">would</span><span class="chip">might</span><span class="chip">some</span><span class="chip">many</span><span class="chip">most</span><span class="chip">few</span><span class="chip">often</span><span class="chip">best</span><span class="chip">fastest</span><span class="chip">largest</span><span class="chip">always</span><span class="chip">never</span><span class="chip">guarantee</span><span class="chip">world-class</span><span class="chip">next-generation</span></div>
+    </div>
+    <div>
+      <div class="lbl">Claim carefully</div>
+      <table>
+        <tr><th>Instead of</th><th>Write</th></tr>
+        <tr><td class="mono">ensure</td><td>help ensure, confirm, verify</td></tr>
+        <tr><td class="mono">real time</td><td>near real time, or the measured speed</td></tr>
+        <tr><td class="mono">legacy (their systems)</td><td>traditional, outdated, manual</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="foot"><span>Use Case-Led Style Guide &middot; Anonymized</span><span>Co-authored by Danielle Chauncey &middot; 8 / 9</span></div>
+</section>
+
+<!-- ============ PAGE 9: GRAMMAR + HOW IT RUNS ============ -->
+<section class="page">
+  <div class="runhead"><h2><span class="n">09</span>Grammar, punctuation, accessibility</h2><span class="tag">Quick reference</span></div>
+
+  <div class="qr">
+    <div><b>Point of view</b>"You" for the reader. "We" for the company.</div>
+    <div><b>Sentences</b>25 words max. One space after a period.</div>
+    <div><b>Capitalization</b>Only proper nouns, title-case headings, and sentence starts.</div>
+    <div><b>Dates</b><span class="mono">October 1, 2022</span> or <span class="mono">2022-10-01</span>. Never <span class="mono">10/01/2022</span> or "1st."</div>
+    <div><b>Lists</b>Bullets for items, numbers for steps. Introduce every list with a colon.</div>
+    <div><b>Acronyms</b>Define at first mention, then abbreviate. Titles get one form only.</div>
+    <div><b>Commas</b>Serial comma always. Comma before a conjunction joining two clauses, and after an intro phrase.</div>
+    <div><b>Semicolons</b>Avoid them. Write two sentences.</div>
+    <div><b>Colons</b>Lowercase after one unless a full sentence follows.</div>
+    <div><b>Slashes</b>OK in <span class="mono">I/O</span>, <span class="mono">CI/CD</span>, paths. Never <span class="mono">and/or</span> or <span class="mono">add/edit</span>.</div>
+    <div><b>Ranges</b>En dash, no spaces: <span class="mono">August 13&ndash;15</span>.</div>
+    <div><b>Symbols</b>No ampersands in body text. Straight apostrophes only.</div>
+  </div>
+
+  <div class="block two">
+    <div>
+      <div class="lbl">Skip the Latin</div>
+      <table>
+        <tr><th>Don't use</th><th>Use instead</th></tr>
+        <tr><td class="mono">e.g.</td><td>for example, such as</td></tr>
+        <tr><td class="mono">i.e.</td><td>that is, specifically</td></tr>
+        <tr><td class="mono">etc.</td><td>and so on, or cut it</td></tr>
+        <tr><td class="mono">ad hoc</td><td>one-time, when required</td></tr>
+        <tr><td class="mono">per</td><td>for, for each</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="lbl">Accessibility and inclusion</div>
+      <ul class="numl">
+        <li>Descriptive link text, never "here." Device-neutral verbs: "choose," not "click."</li>
+        <li>Real heading levels. Bold is not a heading. Headers on every table.</li>
+        <li>"Preceding" and "following," not "above" and "below."</li>
+        <li>Simple images, even white padding, sentence-case labels.</li>
+        <li>Primary/replica, allowlist/denylist. No ableist or sexist terms.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="runhead next"><h2><span class="n">&rarr;</span>How the guide runs</h2><span class="tag">From document to system</span></div>
+  <div class="flow">
+    <div class="b"><b>Draft</b>Contributor writes from the template</div><div class="arr">&rarr;</div>
+    <div class="b ind"><b>Lint</b>Naming, limits, and flagged words checked in CI/CD</div><div class="arr">&rarr;</div>
+    <div class="b"><b>Edit</b>Writers edit substance and merge pillar answers</div><div class="arr">&rarr;</div>
+    <div class="b dark"><b>Publish</b>6 weeks to publish became 2</div>
+  </div>
+  <p class="sub" style="margin-top:5px">Contributors get support through writer office hours and 1:1 developmental reviews. The guide also became the source for an LLM knowledge base built with engineering, which improved the relevance of AI-generated responses by 25% in early testing.</p>
+
+  <div class="block">
+    <div class="lbl">See it in production</div>
+    <div class="prod">
+      <a href="https://aws.amazon.com/solutions/"><span class="k">Content strategy</span><b>AWS Solutions Library</b><span>The library this guide governs. The taxonomy, naming formats, and page components in this guide are live here.</span><span class="url">aws.amazon.com/solutions</span></a>
+      <a href="https://docs.aws.amazon.com/aurora-dsql/latest/userguide/"><span class="k">Launch documentation</span><b>Amazon Aurora DSQL User Guide</b><span>GA launch documentation for AWS's first multi-Region serverless SQL database, written to the same standards.</span><span class="url">docs.aws.amazon.com/aurora-dsql</span></a>
+    </div>
+  </div>
+
+  <div class="foot"><span>Use Case-Led Style Guide &middot; Anonymized</span><span>Co-authored by Danielle Chauncey &middot; 9 / 9</span></div>
+</section>
+
+</body></html>
