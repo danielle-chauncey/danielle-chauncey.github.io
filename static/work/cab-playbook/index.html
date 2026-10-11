@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Customer Advisory Board Playbook | Danielle Chauncey</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#17171d; --muted:#5c5c6b; --soft:#8a8a98; --hair:#e3e1da; --paper:#f5f3ec;
+          --indigo:#4a3fd6; --indigo-wash:#ecebfd; --lime:#c8f03c; --lime-deep:#5a7a00; }
+  @page { size: letter; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #9a9a9a; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font: 400 10.6pt/1.5 'Inter', Arial, sans-serif; color: var(--ink); }
+  .page { width: 8.5in; height: 11in; background: #fff; margin: 0 auto 24px; padding: 0.6in 0.75in; position: relative; overflow: hidden; page-break-after: always; break-after: page; }
+  @media print { html, body { background: none; } .page { margin: 0; } }
+
+  .banner { font: 600 7.4pt 'JetBrains Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: #8a4b00; }
+  h1 { font: 800 30pt/1.05 'Inter'; letter-spacing: -.03em; margin: 22px 0 12px; }
+  .lede { font-size: 12pt; color: var(--muted); max-width: 5.6in; }
+  .rule { margin: 30px 0 0; padding: 16px 0 16px 18px; border-left: 4px solid var(--lime); font-size: 12pt; max-width: 6.2in; }
+  .rule b { display: block; font: 600 7.4pt 'JetBrains Mono'; letter-spacing: .12em; text-transform: uppercase; color: var(--lime-deep); margin-bottom: 4px; }
+
+  /* cover: order of operations */
+  .ops-h { margin-top: 40px; font: 600 7.4pt 'JetBrains Mono'; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); }
+  .ops { list-style: none; margin-top: 10px; border-top: 2px solid var(--ink); }
+  .ops li { display: grid; grid-template-columns: 0.5in 1.3in 1fr; align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--hair); }
+  .ops .n { font: 600 9pt 'JetBrains Mono'; color: var(--indigo); }
+  .ops .m { font: 500 8.6pt 'JetBrains Mono'; color: var(--soft); }
+  .ops .t { font: 600 11pt 'Inter'; }
+  .ops .t span { font-weight: 400; color: var(--muted); font-size: 10pt; margin-left: 6px; }
+  .ops li.yr { background: var(--paper); }
+  .ops li.yr .n, .ops li.yr .m { padding-left: 0; }
+
+  /* stage blocks */
+  .phase { font: 600 7.4pt 'JetBrains Mono'; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); margin-top: 18px; }
+  .stage { display: grid; grid-template-columns: 1.15in 1fr; gap: 0 18px; padding: 22px 0; border-top: 1px solid var(--hair); }
+  .stage.first { border-top: 2px solid var(--ink); margin-top: 8px; }
+  .num { font: 800 30pt/1 'Inter'; letter-spacing: -.03em; color: var(--indigo); }
+  .when { font: 500 8.4pt 'JetBrains Mono'; color: var(--soft); margin-top: 6px; }
+  .stage h2 { font: 800 15pt/1.15 'Inter'; letter-spacing: -.015em; }
+  .stage .what { margin-top: 4px; color: var(--ink); }
+  .kv { margin-top: 10px; display: grid; grid-template-columns: 0.75in 1fr; row-gap: 4px; font-size: 10pt; }
+  .kv dt { font: 600 7.4pt/1.9 'JetBrains Mono'; letter-spacing: .1em; text-transform: uppercase; color: var(--soft); }
+  .kv dd { color: var(--ink); }
+  .kv dt.ai { color: var(--lime-deep); }
+  .lag { margin-top: 18px; display: grid; grid-template-columns: 1.15in 1fr; gap: 0 18px; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 14px 0; }
+  .lag b.k { font: 600 7.4pt/1.6 'JetBrains Mono'; letter-spacing: .12em; text-transform: uppercase; color: var(--indigo); }
+  .lag h3 { font: 800 13pt 'Inter'; margin-bottom: 4px; }
+  .lag p { font-size: 10pt; }
+  .map { margin-top: 10px; width: 100%; border-collapse: collapse; font-size: 9.6pt; }
+  .map th { text-align: left; font: 600 7.2pt 'JetBrains Mono'; letter-spacing: .1em; text-transform: uppercase; color: var(--soft); padding: 0 8px 4px 0; border-bottom: 2px solid var(--ink); }
+  .map td { padding: 7px 8px 7px 0; border-bottom: 1px solid var(--hair); vertical-align: top; }
+  .map td:first-child { font-weight: 700; width: 1.6in; }
+  .why { margin-top: 12px; background: var(--paper); border-radius: 4px; padding: 9px 12px; font-size: 10pt; }
+  .why b { font-weight: 700; }
+
+  /* one visual per page */
+  .inputs { margin-top: 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .inputs div { border-top: 3px solid var(--indigo); padding-top: 6px; font-size: 9.4pt; color: var(--muted); }
+  .inputs b { display: block; font: 700 10pt 'Inter'; color: var(--ink); }
+
+  .gates { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); margin-top: 16px; }
+  .gates::before { content: ''; position: absolute; left: 6%; right: 6%; top: 12px; height: 2px; background: var(--ink); }
+  .gates .g { position: relative; text-align: center; }
+  .gates .g i { display: inline-block; font: 600 7.6pt 'JetBrains Mono'; font-style: normal; background: #fff; border: 1.5px solid var(--ink); border-radius: 12px; padding: 3px 8px; }
+  .gates .g.hl i { background: var(--lime); }
+  .gates .g b { display: block; font: 600 9.4pt 'Inter'; margin-top: 6px; }
+
+  .loop { margin-top: 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .loop span { font: 600 8pt 'JetBrains Mono'; border: 1.5px solid var(--ink); border-radius: 4px; padding: 4px 8px; }
+  .loop span.hl { background: var(--lime); }
+  .loop i { font-style: normal; font-weight: 700; }
+
+  .quarters { margin-top: 12px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .quarters div { background: var(--indigo-wash); border-radius: 4px; padding: 8px 10px; font-size: 9.2pt; color: var(--muted); }
+  .quarters b { display: block; font: 600 8pt 'JetBrains Mono'; color: var(--indigo); margin-bottom: 2px; }
+
+  .measures { margin-top: 10px; border-top: 2px solid var(--ink); }
+  .measures div { display: grid; grid-template-columns: 1.9in 1fr; padding: 9px 0; border-bottom: 1px solid var(--hair); font-size: 10pt; }
+  .measures b { font-weight: 700; }
+  .measures span { color: var(--muted); }
+
+  .closing { margin-top: 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .closing div { border: 1.5px solid var(--ink); border-radius: 6px; padding: 12px 14px; font-size: 9.8pt; }
+  .closing div.dark { background: var(--ink); color: #fff; }
+  .closing b { display: block; font: 600 7.4pt 'JetBrains Mono'; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 4px; color: var(--indigo); }
+  .closing div.dark b { color: var(--lime); }
+
+  .p5 .stage { padding: 14px 0; }
+  .p5 .measures div { padding: 6px 0; }
+  .p5 .map td { padding: 5px 8px 5px 0; }
+  .p5 .why { margin-top: 8px; }
+  .foot { position: absolute; bottom: 0.4in; left: 0.75in; right: 0.75in; display: flex; justify-content: space-between; font: 500 7.4pt 'JetBrains Mono'; color: var(--soft); }
+</style></head><body>
+
+<!-- ============ PAGE 1 ============ -->
+<section class="page">
+  <span class="banner">Portfolio sample &middot; fictional company &middot; names and figures are invented</span>
+  <h1>Customer Advisory<br>Board Playbook</h1>
+  <p class="lede">How Northwind runs its customer advisory board for 28 CIOs and CTOs, in the order the work happens. Ten stages, one program year.</p>
+
+  <div class="rule"><b>The one rule</b>Every ask a member makes gets an answer, even when the answer is no.</div>
+
+  <div class="ops-h">Order of operations</div>
+  <ol class="ops">
+    <li><span class="n">01</span><span class="m">Aug to Sep</span><span class="t">Nominations</span></li>
+    <li><span class="n">02</span><span class="m">Oct</span><span class="t">Membership selection<span>account analysis</span></span></li>
+    <li><span class="n">03</span><span class="m">Nov</span><span class="t">Campaign setup<span>CRM tracking</span></span></li>
+    <li><span class="n">04</span><span class="m">Dec</span><span class="t">Leadership review</span></li>
+    <li><span class="n">05</span><span class="m">Jan to Feb</span><span class="t">Member onboarding</span></li>
+    <li><span class="n">06</span><span class="m">Feb</span><span class="t">Agenda curation</span></li>
+    <li><span class="n">07</span><span class="m">Feb to Apr</span><span class="t">Content curation</span></li>
+    <li><span class="n">08</span><span class="m">May</span><span class="t">Annual meeting<span>planning and execution</span></span></li>
+    <li class="yr"><span class="n">09</span><span class="m">Quarterly</span><span class="t">Member webinars</span></li>
+    <li class="yr"><span class="n">10</span><span class="m">Nov to Dec</span><span class="t">User conference<span>members-only program</span></span></li>
+  </ol>
+
+  <div class="foot"><span>Danielle Chauncey &middot; sample CAB playbook</span><span>1 / 5</span></div>
+</section>
+
+<!-- ============ PAGE 2: 01-03 ============ -->
+<section class="page">
+  <span class="banner">Portfolio sample &middot; fictional</span>
+  <div class="phase">Build the board</div>
+
+  <div class="stage first">
+    <div><div class="num">01</div><div class="when">Aug to Sep</div></div>
+    <div>
+      <h2>Nominations</h2>
+      <p class="what">Account teams nominate senior technical leaders for next year's board.</p>
+      <dl class="kv"><dt>Owner</dt><dd>Program manager opens the cycle. Account teams nominate.</dd>
+        <dt>Done</dt><dd>Nominations closed. Each one has a written justification.</dd>
+        <dt class="ai">AI</dt><dd>Summarizes every justification into one comparable view.</dd></dl>
+      <div class="why"><b>Renewals first.</b> Draft the renewal list before opening nominations, so account teams know how many seats are open.</div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div><div class="num">02</div><div class="when">Oct</div></div>
+    <div>
+      <h2>Membership selection</h2>
+      <p class="what">Score every nominee and returning member against the same account data.</p>
+      <div class="inputs">
+        <div><b>TAS</b>Total addressable spend. Room to grow.</div>
+        <div><b>TTM spend</b>Trailing 12 months. Current scale.</div>
+        <div><b>Role and fit</b>Decision scope, technical depth, last cycle's engagement.</div>
+      </div>
+      <dl class="kv"><dt>Owner</dt><dd>Program manager, with business operations for the spend data.</dd>
+        <dt>Done</dt><dd>A ranked list of renewals, retirements, and new seats.</dd>
+        <dt class="ai">AI</dt><dd>Pulls each nominee's account history from the CRM into a one-page profile.</dd></dl>
+      <div class="why"><b>Data ranks the list. Judgment sets the room.</b> Balance industry, region, and company size so members see peers.</div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div><div class="num">03</div><div class="when">Nov</div></div>
+    <div>
+      <h2>Campaign setup</h2>
+      <p class="what">Build the CRM campaigns that tag each member account, so engagement and pipeline are tracked all year.</p>
+      <dl class="kv"><dt>Owner</dt><dd>Program manager.</dd>
+        <dt>Done</dt><dd>One campaign per touchpoint. Members added. Statuses defined.</dd></dl>
+      <div class="why"><b>Set it up before the first invitation.</b> Engagement that isn't tagged on day one can't be reported later.</div>
+    </div>
+  </div>
+
+  <div class="foot"><span>Danielle Chauncey &middot; sample CAB playbook</span><span>2 / 5</span></div>
+</section>
+
+<!-- ============ PAGE 3: 04-06 ============ -->
+<section class="page">
+  <span class="banner">Portfolio sample &middot; fictional</span>
+  <div class="phase">Approve and invite</div>
+
+  <div class="stage first">
+    <div><div class="num">04</div><div class="when">Dec</div></div>
+    <div>
+      <h2>Leadership review</h2>
+      <p class="what">Executive sponsors approve the roster, the retirements, and the year's goals.</p>
+      <dl class="kv"><dt>Owner</dt><dd>Program manager prepares it. Sponsors decide.</dd>
+        <dt>Done</dt><dd>Written sign-off on the roster.</dd>
+        <dt class="ai">AI</dt><dd>Drafts the decision document from the tracker. The program manager edits.</dd></dl>
+      <div class="why"><b>Bring a decision document, not a deck.</b> Recommendation first, data behind it, decisions needed at the end. The same format returns for the agenda review and the debrief.</div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div><div class="num">05</div><div class="when">Jan to Feb</div></div>
+    <div>
+      <h2>Member onboarding</h2>
+      <p class="what">Tell account teams the decisions, then invite members and bring new ones up to speed.</p>
+      <dl class="kv"><dt>Owner</dt><dd>Program manager. Account teams confirm the NDA.</dd>
+        <dt>Done</dt><dd>Every member registered, under NDA, and clear on the year ahead.</dd></dl>
+      <div class="why"><b>Account teams hear first.</b> No seller should learn about their customer's invitation from the customer.</div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div><div class="num">06</div><div class="when">Feb</div></div>
+    <div>
+      <h2>Agenda curation</h2>
+      <p class="what">Pick sessions from two sources: what members asked for last year, and what product teams need to learn.</p>
+      <dl class="kv"><dt>Owner</dt><dd>Program manager, with a core planning team.</dd>
+        <dt>Done</dt><dd>Agenda approved by sponsors. One owner per session.</dd></dl>
+      <div class="why"><b>Every session ends in a question for members.</b> A session that asks nothing is a keynote. Move it to a webinar.</div>
+    </div>
+  </div>
+
+  <div class="foot"><span>Danielle Chauncey &middot; sample CAB playbook</span><span>3 / 5</span></div>
+</section>
+
+<!-- ============ PAGE 4: 07-08 ============ -->
+<section class="page">
+  <span class="banner">Portfolio sample &middot; fictional</span>
+  <div class="phase">Run the meeting</div>
+
+  <div class="stage first">
+    <div><div class="num">07</div><div class="when">Feb to Apr</div></div>
+    <div>
+      <h2>Content curation</h2>
+      <p class="what">Session owners write the pre-reads. The program manager runs the gates and reviews every draft.</p>
+      <div class="gates">
+        <div class="g"><i>T-12 wk</i><b>Kickoff</b></div>
+        <div class="g"><i>T-10 wk</i><b>Session plan</b></div>
+        <div class="g"><i>T-7 wk</i><b>Draft review</b></div>
+        <div class="g"><i>T-4 wk</i><b>Final doc</b></div>
+        <div class="g hl"><i>T-3 wk</i><b>Pre-reads out</b></div>
+      </div>
+      <dl class="kv" style="margin-top:16px"><dt>Owner</dt><dd>Session owners from product teams.</dd>
+        <dt>Done</dt><dd>Pre-reads in members' hands three weeks out.</dd>
+        <dt class="ai">AI</dt><dd>First-pass review of each draft against the template, before human review.</dd></dl>
+      <div class="why"><b>Write for both readers.</b> Deep enough for a CTO. Plain enough for a CIO to repeat to their board.</div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div><div class="num">08</div><div class="when">May</div></div>
+    <div>
+      <h2>Annual meeting</h2>
+      <p class="what">Two days, 12 sessions. Members face each other. Northwind's leaders listen from the gallery.</p>
+      <dl class="kv"><dt>Owner</dt><dd>Program manager onsite. The events agency runs logistics.</dd>
+        <dt>Done</dt><dd>Notes for every session. Survey sent before members leave. Recaps out within two weeks.</dd>
+        <dt class="ai">AI</dt><dd>Turns session notes into one row per ask, tagged by product.</dd></dl>
+      <div class="why"><b>Close the loop after.</b> Every ask gets a row, a product owner, and an answer back to the member.</div>
+      <div class="loop"><span>Ask</span><i>&rarr;</i><span>Owner</span><i>&rarr;</i><span>Decision</span><i>&rarr;</i><span class="hl">Member told</span></div>
+    </div>
+  </div>
+
+  <div class="lag">
+    <b class="k">The number<br>to watch</b>
+    <div><h3>Closure lag</h3><p>The days between a product team's decision and the member hearing about it. Teams decide, then nobody tells the customer. That gap ends advisory boards quietly. Track it on every ask.</p></div>
+  </div>
+
+  <div class="foot"><span>Danielle Chauncey &middot; sample CAB playbook</span><span>4 / 5</span></div>
+</section>
+
+<!-- ============ PAGE 5: 09-10 + measures ============ -->
+<section class="page p5">
+  <span class="banner">Portfolio sample &middot; fictional</span>
+  <div class="phase">Stay close all year</div>
+
+  <div class="stage first">
+    <div><div class="num">09</div><div class="when">Quarterly</div></div>
+    <div>
+      <h2>Member webinars</h2>
+      <p class="what">One virtual session a quarter keeps members engaged between meetings.</p>
+      <div class="quarters">
+        <div><b>Q1</b>Year preview</div>
+        <div><b>Q2</b>What we heard</div>
+        <div><b>Q3</b>You asked, we did</div>
+        <div><b>Q4</b>Roadmap update</div>
+      </div>
+      <div class="why"><b>Close the loop in public.</b> Show members what changed because of them. Invite a member to co-present.</div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div><div class="num">10</div><div class="when">Nov to Dec</div></div>
+    <div>
+      <h2>User conference</h2>
+      <p class="what">A members-only program inside Northwind's annual conference: one session with the CEO and a member dinner.</p>
+      <dl class="kv"><dt>Owner</dt><dd>Program manager, with the conference team.</dd>
+        <dt>Done</dt><dd>Members registered. Dinner seated. A briefing doc for every leader attending.</dd>
+        <dt class="ai">AI</dt><dd>An agent drafts each briefing doc from CRM data. The account manager reviews it.</dd></dl>
+      <div class="why"><b>Seat members next to leaders they don't know yet.</b> New relationships are a goal of the board, so seating is planned like an agenda.</div>
+    </div>
+  </div>
+
+  <div class="phase" style="margin-top:6px">What the program measures</div>
+  <div class="measures">
+    <div><b>Renewal rate</b><span>Target 75%+. Members think the board is worth their time.</span></div>
+    <div><b>Session ratings</b><span>Target 4.5 of 5. Which sessions earned the room.</span></div>
+    <div><b>Loop-closure rate</b><span>Target 90% within 60 days. Members heard back.</span></div>
+    <div><b>Engaged pipeline</b><span>Trend, not target. Reported as correlation, not cause.</span></div>
+  </div>
+
+  <div class="phase" style="margin-top:14px">The same ten stages run customer advocacy</div>
+  <table class="map">
+    <tr><th>CAB stage</th><th>In an advocacy program</th></tr>
+    <tr><td>Nominations, selection</td><td>Account teams nominate customers with a story. Score them on outcome, brand, and willingness to go public.</td></tr>
+    <tr><td>Content, annual meeting</td><td>The case study, video, or conference talk, with legal and customer approvals as the gates.</td></tr>
+    <tr><td>Close the loop</td><td>Send the customer the published piece and how far it traveled.</td></tr>
+  </table>
+
+  <div class="foot"><span>Danielle Chauncey &middot; sample CAB playbook &middot; fictional company, no employer information</span><span>5 / 5</span></div>
+</section>
+</body></html>
