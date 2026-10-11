@@ -9,7 +9,7 @@
 </header>
 
 {{- $fallback := dict
-  "lucidlink-gtm" (dict "d" "A 90-day go-to-market plan for LucidLink's developer platform: beachhead, positioning against the real alternative, funnel, north-star metric, and phase gates." "date" "2026-06-26")
+  "datanow-gtm" (dict "d" "A 90-day go-to-market plan for DataNow, a fictional developer platform: beachhead, positioning against the real alternative, funnel, north-star metric, and phase gates." "date" "2026-06-26")
   "commvault-brief" (dict "d" "A four-page partner solution brief for Commvault on AWS, written in Commvault's own design system." "date" "2026-09-28")
   "chainguard-launch-brief" (dict "d" "A launch brief for Chainguard Agent Skills, written in Chainguard's own design system." "date" "2026-09-30")
   "exec-engagement-playbook" (dict "d" "A six-page operating playbook for an executive engagement program at a flagship annual forum, from first invite to leadership debrief. Written for handoff." "date" "2026-10-03")
@@ -19,7 +19,8 @@
   {{- if .IsDir }}
     {{- $dir := .Name }}
     {{- $file := printf "static/work/%s/index.html" $dir }}
-    {{- if fileExists $file }}
+    {{- /* Folders whose index.html is a meta-refresh redirect (e.g. lucidlink-gtm -> datanow-gtm) stay off the list. */ -}}
+    {{- if and (fileExists $file) (not (strings.Contains (readFile $file) `http-equiv="refresh"`)) }}
       {{- $html := readFile $file }}
       {{- $title := $dir }}
       {{- with findRESubmatch `<title>([^<]*)</title>` $html 1 }}{{ $title = index (index . 0) 1 | htmlUnescape }}{{ end }}
